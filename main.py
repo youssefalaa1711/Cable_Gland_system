@@ -22,12 +22,15 @@ def get_gland_size(request: Request, cable_size: float = Form(...)):
     conn = sqlite3.connect("cable_glands.db")
     cursor = conn.cursor()
 
+    # Select the largest gland that fits
     cursor.execute("""
         SELECT gland_size FROM glands
         WHERE ? BETWEEN min_size AND max_size
+        ORDER BY max_size DESC
+        LIMIT 1
     """, (cable_size,))
+    
     result = cursor.fetchone()
-
     conn.close()
 
     if result:
