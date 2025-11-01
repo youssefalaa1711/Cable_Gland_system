@@ -1,3 +1,4 @@
+/* General styling */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #ffffff;
@@ -7,23 +8,43 @@ body {
     padding: 0;
 }
 
+/* Header styling */
 header {
-    background-color: #e60000;
-    color: white;
-    padding: 20px;
+    background-color: #ffffff;
+    color: #e60000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 40px;
+    border-bottom: 3px solid #e60000;
+    position: relative;
 }
 
 .logo {
     width: 120px;
-    height: auto;
+    height: 100px;
+    position: absolute;
+    left: 30px;
 }
 
+header h1 {
+    font-size: 1.8em;
+    color: #e60000;
+    margin: 0;
+    font-weight: bold;
+}
+
+/* Main content */
 main {
-    margin-top: 40px;
+    margin-top: 50px;
 }
 
 form {
     margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
 }
 
 input[type="number"] {
@@ -31,6 +52,7 @@ input[type="number"] {
     width: 200px;
     border: 1px solid #e60000;
     border-radius: 5px;
+    margin-left: 10px;
 }
 
 button {
@@ -46,6 +68,7 @@ button:hover {
     background-color: #cc0000;
 }
 
+/* Result box */
 .result {
     background-color: #f7f7f7;
     border: 1px solid #e60000;
@@ -55,6 +78,7 @@ button:hover {
     margin-top: 20px;
 }
 
+/* Footer */
 footer {
     background-color: #e60000;
     color: white;
@@ -62,4 +86,5 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+    font-size: 0.9em;
 }
