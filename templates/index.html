@@ -14,9 +14,31 @@
 
     <main>
         <form method="post">
-            <label for="cable_size">Enter Cable Size (mm):</label>
-            <input type="number" step="0.1" id="cable_size" name="cable_size" required>
-            <button type="submit">Find Gland</button>
+            <div class="form-row">
+                <label for="category">Cable Armour:</label>
+                <select id="category" name="category" required>
+                    <option value="unarmoured" selected>Unarmoured</option>
+                    <option value="armoured">Armoured</option>
+                </select>
+            </div>
+
+            <div class="form-row" id="armour-options" style="display:none;">
+                <label for="cable_type">Armoured Type:</label>
+                <select id="cable_type" name="cable_type">
+                    <option value="SWA">SWA</option>
+                    <option value="AWA">AWA</option>
+                    <option value="STA">STA</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <label for="cable_size">Enter Cable Size (mm):</label>
+                <input type="number" step="0.1" id="cable_size" name="cable_size" required>
+            </div>
+
+            <div class="form-row">
+                <button type="submit">Find Gland</button>
+            </div>
         </form>
 
         {% if gland_size %}
@@ -30,5 +52,28 @@
     <footer>
         <p>© 2025 Elsewedy Electric</p>
     </footer>
+
+    <script>
+        // Minimal JS to show/hide armoured options and require cable_type only when needed
+        (function(){
+            const category = document.getElementById('category');
+            const armourOptions = document.getElementById('armour-options');
+            const cableType = document.getElementById('cable_type');
+
+            function updateVisibility() {
+                if (category.value === 'armoured') {
+                    armourOptions.style.display = '';
+                    cableType.required = true;
+                } else {
+                    armourOptions.style.display = 'none';
+                    cableType.required = false;
+                }
+            }
+
+            category.addEventListener('change', updateVisibility);
+            // initialize on load
+            updateVisibility();
+        })();
+    </script>
 </body>
 </html>

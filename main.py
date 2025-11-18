@@ -18,18 +18,39 @@ def home(request: Request):
 
 # Handle form submission
 @app.post("/", response_class=HTMLResponse)
-def get_gland_size(request: Request, cable_size: float = Form(...)):
+def get_gland_size(
+    request: Request,
+    cable_size: float = Form(...),
+    category: str = Form("unarmoured"),
+    cable_type: str | None = Form(None),
+):
     conn = sqlite3.connect("cable_glands.db")
     cursor = conn.cursor()
 
-    # Select the largest gland that fits
-    cursor.execute("""
-        SELECT gland_size FROM glands
-        WHERE ? BETWEEN min_size AND max_size
-        ORDER BY max_size DESC
-        LIMIT 1
-    """, (cable_size,))
-    
+    if category == "armoured":
+        # Query the new armoured_glands table and match cable_type
+        cursor.execute(
+            """
+            SELECT gland_size FROM armoured_glands
+            WHERE cable_type = ?
+              AND ? BETWEEN min_size AND max_size
+            ORDER BY max_size DESC
+            LIMIT 1
+            """,
+            (cable_type, cable_size),
+        )
+    else:
+        # Original behavior: unarmoured -> search existing glands table
+        cursor.execute(
+            """
+            SELECT gland_size FROM glands
+            WHERE ? BETWEEN min_size AND max_size
+            ORDER BY max_size DESC
+            LIMIT 1
+            """,
+            (cable_size,),
+        )
+
     result = cursor.fetchone()
     conn.close()
 
