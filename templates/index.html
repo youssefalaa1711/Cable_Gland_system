@@ -7,73 +7,134 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <header>
-        <img src="/static/logo.png" alt="Elsewedy Logo" class="logo">
-        <h1>Cable Gland Finder</h1>
-    </header>
+<header>
+    <img src="/static/logo.png" alt="Elsewedy Logo" class="logo">
+    <h1>Cable Gland Finder</h1>
+</header>
 
-    <main>
-        <form method="post">
-            <div class="form-row">
-                <label for="category">Cable Armour:</label>
-                <select id="category" name="category" required>
-                    <option value="unarmoured" selected>Unarmoured</option>
-                    <option value="armoured">Armoured</option>
-                </select>
-            </div>
+<main>
 
-            <div class="form-row" id="armour-options" style="display:none;">
-                <label for="cable_type">Armoured Type:</label>
-                <select id="cable_type" name="cable_type">
-                    <option value="SWA">SWA</option>
-                    <option value="AWA">AWA</option>
-                    <option value="STA">STA</option>
-                </select>
-            </div>
+<form method="post">
 
-            <div class="form-row">
-                <label for="cable_size">Enter Cable Size (mm):</label>
-                <input type="number" step="0.1" id="cable_size" name="cable_size" required>
-            </div>
+    <!-- 1. Cable Category -->
+    <div class="form-row">
+        <label for="category">Cable Armour:</label>
+        <select id="category" name="category" required>
+            <option value="unarmoured" selected>Unarmoured</option>
+            <option value="armoured">Armoured</option>
+        </select>
+    </div>
 
-            <div class="form-row">
-                <button type="submit">Find Gland</button>
-            </div>
-        </form>
+    <!-- 2. Armoured Type -->
+    <div class="form-row" id="armour-options" style="display:none;">
+        <label for="cable_type">Armoured Type:</label>
+        <select id="cable_type" name="cable_type">
+            <option value="steel_wire">Steel Wire</option>
+            <option value="steel_tape">Steel Tape</option>
+        </select>
+    </div>
 
-        {% if gland_size %}
-        <div class="result">
-            <h2>Recommended Gland Size:</h2>
-            <p>{{ gland_size }}</p>
-        </div>
-        {% endif %}
-    </main>
+    <!-- 3. Sub-type (C1W / E1SW / C1X) -->
+    <div class="form-row" id="subtype-options" style="display:none;">
+        <label for="subtype">Armour Subtype:</label>
+        <select id="subtype" name="subtype">
+            <!-- Populated dynamically by JS -->
+        </select>
+    </div>
 
-    <footer>
-        <p>© 2025 Elsewedy Electric</p>
-    </footer>
+    <!-- 4. Outer Diameter -->
+    <div class="form-row" id="outer-row">
+        <label for="outer_diameter">Outer Diameter (mm):</label>
+        <input type="number" step="0.1" id="outer_diameter" name="outer_diameter">
+    </div>
 
-    <script>
-        // Minimal JS to show/hide armoured options and require cable_type only when needed
-        (function(){
-            const category = document.getElementById('category');
-            const armourOptions = document.getElementById('armour-options');
-            const cableType = document.getElementById('cable_type');
+    <!-- 5. Inner Diameter -->
+    <div class="form-row" id="inner-row" style="display:none;">
+        <label for="inner_diameter">Inner Diameter (mm):</label>
+        <input type="number" step="0.1" id="inner_diameter" name="inner_diameter">
+    </div>
 
-            function updateVisibility() {
-                if (category.value === 'armoured') {
-                    armourOptions.style.display = '';
-                    cableType.required = true;
-                } else {
-                    armourOptions.style.display = 'none';
-                    cableType.required = false;
-                }
-            }
+    <div class="form-row">
+        <button type="submit">Find Gland</button>
+    </div>
+</form>
 
-            category.addEventListener('change', updateVisibility);
-            // initialize on load
-            updateVisibility();
-        })();
-    </script>
+{% if gland_size %}
+<div class="result">
+    <h2>Recommended Gland Size:</h2>
+    <p>{{ gland_size }}</p>
+</div>
+{% endif %}
+
+</main>
+
+<footer>
+    <p>© 2025 Elsewedy Electric</p>
+</footer>
+
+<script>
+(function(){
+    const category = document.getElementById("category");
+    const armourOptions = document.getElementById("armour-options");
+    const cableType = document.getElementById("cable_type");
+
+    const subtypeRow = document.getElementById("subtype-options");
+    const subtypeSelect = document.getElementById("subtype");
+
+    const outerRow = document.getElementById("outer-row");
+    const innerRow = document.getElementById("inner-row");
+
+    function updateCategory() {
+        if (category.value === "armoured") {
+            armourOptions.style.display = "";
+            updateCableType();
+        } else {
+            armourOptions.style.display = "none";
+            subtypeRow.style.display = "none";
+            outerRow.style.display = "";
+            innerRow.style.display = "none";
+        }
+    }
+
+    function updateCableType() {
+        if (cableType.value === "steel_wire") {
+            subtypeRow.style.display = "";
+            subtypeSelect.innerHTML = `
+                <option value="C1W">C1W</option>
+                <option value="E1SW">E1SW</option>
+            `;
+            updateSubtype();
+        }
+        else if (cableType.value === "steel_tape") {
+            subtypeRow.style.display = "";
+            subtypeSelect.innerHTML = `
+                <option value="C1X">C1X</option>
+            `;
+            outerRow.style.display = "";
+            innerRow.style.display = "none";
+        }
+    }
+
+    function updateSubtype() {
+        const val = subtypeSelect.value;
+
+        if (val === "C1W") {
+            outerRow.style.display = "";
+            innerRow.style.display = "none";
+        }
+        else if (val === "E1SW") {
+            outerRow.style.display = "";
+            innerRow.style.display = "";
+        }
+    }
+
+    category.addEventListener("change", updateCategory);
+    cableType.addEventListener("change", updateCableType);
+    subtypeSelect.addEventListener("change", updateSubtype);
+
+    updateCategory();
+})();
+</script>
+
 </body>
 </html>
