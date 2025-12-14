@@ -62,21 +62,25 @@ def create_database():
 
     armoured_data = [
         # C1W (outer only)
-        ("C1W", "20S", None, None, 13.2, 15.5),
-        ("C1W", "20L", None, None, 15.6, 19.3),
-        ("C1W", "25S", None, None, 19.4, 23),
-        ("C1W", "25L", None, None, 23.1, 26.0),
-        ("C1W", "32S", None, None, 26.1, 31),
-        ("C1W", "32L", None, None, 31.1, 33.5),
-        ("C1W", "40S", None, None, 33.6, 38.0),
-        ("C1W", "40L", None, None, 38.1, 40),
-        ("C1W", "50S", None, None, 40.1, 49.0),
-        ("C1W", "50L", None, None, 49.1, 51.0),
-        ("C1W", "63S", None, None, 51.1, 58.5),
-        ("C1W", "63L", None, None, 58.6, 65),
-        ("C1W", "75S", None, None, 65.1, 71.5),
-        ("C1W", "75L", None, None, 71.6, 78.0),
-        ("C1W", "90", None, None, 78.1, 88.0),
+        ("C1X", "20SS", None, None, 6.1, 11.5),
+        ("C1W", "20S", None, None, 9.5, 15.9),
+        ("C1W", "20L", None, None, 12.5, 20.9),
+        ("C1W", "25S", None, None, 14.0, 22.0),
+        ("C1W", "25L", None, None, 18.2, 26.2),
+        ("C1W", "32", None, None, 23.7, 33.9),
+        ("C1W", "40", None, None, 27.9, 40.4),
+        ("C1W", "50S", None, None, 35.2, 46.7),
+        ("C1W", "50L", None, None, 40.4, 53.1),
+        ("C1W", "63S", None, None, 45.6, 59.4),
+        ("C1W", "63L", None, None, 54.6, 65.9),
+        ("C1W", "75S", None, None, 59.0, 72.1),
+        ("C1W", "75L", None, None, 66.7, 78.5),
+        ("C1W", "90", None, None, 76.2, 90.4),
+        ("C1W", "100", None, None, 89.1, 101.5),
+        ("C1W", "115", None, None, 101.3, 110.3),
+        ("C1W", "130", None, None, 114.0, 123.3),
+        
+        
         
 
         # E1SW (inner + outer — strict check)
@@ -96,21 +100,24 @@ def create_database():
         ("E1SW", "90",66.6, 79.4, 76.2,90.4),
 
         # C1X (outer only)
-        ("C1X", "20S", None, None, 13.2, 15.5),
-        ("C1X", "20L", None, None, 15.6, 19.3),
-        ("C1X", "25S", None, None, 19.4, 23),
-        ("C1X", "25L", None, None, 23.1, 26.0),
-        ("C1X", "32S", None, None, 26.1, 31),
-        ("C1X", "32L", None, None, 31.1, 33.5),
-        ("C1X", "40S", None, None, 33.6, 38.0),
-        ("C1X", "40L", None, None, 38.1, 40),
-        ("C1X", "50S", None, None, 40.1, 49.0),
-        ("C1X", "50L", None, None, 49.1, 51.0),
-        ("C1X", "63S", None, None, 51.1, 58.5),
-        ("C1X", "63L", None, None, 58.6, 65),
-        ("C1X", "75S", None, None, 65.1, 71.5),
-        ("C1X", "75L", None, None, 71.6, 78.0),
-        ("C1X", "90", None, None, 78.1, 88.0),
+        ("C1X", "20SS", None, None, 6.1, 11.5),
+        ("C1X", "20S", None, None, 9.5, 15.9),
+        ("C1X", "20L", None, None, 12.5, 20.9),
+        ("C1X", "25S", None, None, 14.0, 22.0),
+        ("C1X", "25L", None, None, 18.2, 26.2),
+        ("C1X", "32", None, None, 23.7, 33.9),
+        ("C1X", "40", None, None, 27.9, 40.4),
+        ("C1X", "50S", None, None, 35.2, 46.7),
+        ("C1X", "50L", None, None, 40.4, 53.1),
+        ("C1X", "63S", None, None, 45.6, 59.4),
+        ("C1X", "63L", None, None, 54.6, 65.9),
+        ("C1X", "75S", None, None, 59.0, 72.1),
+        ("C1X", "75L", None, None, 66.7, 78.5),
+        ("C1X", "90", None, None, 76.2, 90.4),
+        ("C1X", "100", None, None, 89.1, 101.5),
+        ("C1X", "115", None, None, 101.3, 110.3),
+        ("C1X", "130", None, None, 114.0, 123.3),
+        
         
     ]
 

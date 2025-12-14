@@ -27,7 +27,7 @@ def get_gland_size(
     inner_diameter: str | None = Form(None),
 ):
 
-    # 🔧 Convert blank strings to floats or None safely
+    # Convert blank strings to floats or None safely
     try:
         outer_diameter = float(outer_diameter) if outer_diameter not in (None, "") else None
         inner_diameter = float(inner_diameter) if inner_diameter not in (None, "") else None
@@ -38,7 +38,7 @@ def get_gland_size(
     conn = sqlite3.connect("cable_glands.db")
     cursor = conn.cursor()
 
-    # ===================== ⭐ UNARMOURED =====================
+    # ===================== UNARMOURED =====================
     if category == "unarmoured":
         if outer_diameter is None:
             result = "Please enter a cable diameter."
@@ -56,7 +56,7 @@ def get_gland_size(
         conn.close()
         return templates.TemplateResponse("index.html", {"request": request, "gland_size": result})
 
-    # ===================== 🛡️ ARMOURED =====================
+    # ===================== ARMOURED =====================
     if subtype is None:
         conn.close()
         return templates.TemplateResponse("index.html", {
